@@ -34,7 +34,6 @@ export class HomePage implements OnInit {
   }
 
   handlerAuthentication(isAuthenticated: boolean){
-    console.log(isAuthenticated)
     if( !isAuthenticated ){
       this.router.navigate(['/login']);
     }

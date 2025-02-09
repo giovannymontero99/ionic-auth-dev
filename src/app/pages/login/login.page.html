@@ -1,3 +1,30 @@
 <ion-content [fullscreen]="true">
-  
+
+    <div style="height: 100vh; display: flex; justify-content: center; align-items: center;" >
+        <ion-card >
+            <ion-card-content style="width: 90vw; height: auto;" >
+                <ion-list [formGroup]="authForm">
+                    <ion-item>
+                      <ion-input 
+                        type="email"
+                        label="E-mail"
+                        formControlName="email"
+                        labelPlacement="floating"
+                        placeholder="Enter your email"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input
+                          type="password"
+                          label="Password"
+                          formControlName="password"
+                          labelPlacement="floating"
+                          placeholder="Enter your password"></ion-input>
+                      </ion-item>
+                </ion-list>
+                <ion-button (click)="submitForm()" expand="block" fill="clear" shape="round">
+                    login
+                </ion-button>
+            </ion-card-content>
+        </ion-card>
+    </div>
 </ion-content>
