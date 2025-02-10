@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
-import { UserService } from '../core/auth/user.service';
+import { UserService } from '../core/auth/services/user.service';
 import { reduce, tap } from 'rxjs';
 import { Router } from '@angular/router';
 

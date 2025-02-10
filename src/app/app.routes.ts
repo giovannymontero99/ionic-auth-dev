@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
-import { UserService } from './core/auth/user.service';
+import { UserService } from './core/auth/services/user.service';
 import { map } from 'rxjs';
 
 export const routes: Routes = [
@@ -19,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage),
+    loadComponent: () => import('./core/auth/login.page').then( m => m.LoginPage),
     canActivate: [
       ()=> inject(UserService).isAuthenticated.pipe(map( (isAuthenticated:boolean) => !isAuthenticated))
     ]
