@@ -7,7 +7,13 @@ import { AppComponent } from './app/app.component';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { apiInterceptor } from './app/core/interceptors/api.interceptor';
 import { IonicStorageModule } from '@ionic/storage-angular'
-import { importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, importProvidersFrom, inject } from '@angular/core';
+import { StorageService } from './app/core/services/storage.service';
+import { UserService } from './app/core/auth/services/user.service';
+import { firstValueFrom } from 'rxjs';
+
+
+
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -19,6 +25,6 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(
       withInterceptors([apiInterceptor])
-    ),
+    )
   ],
 });

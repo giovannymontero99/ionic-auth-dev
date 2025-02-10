@@ -18,4 +18,8 @@ export class StorageService {
     return (await this.storagePromise).set(key, value);
   }
 
+  async getToken(): Promise<unknown>{
+    return (await this.storagePromise).get('token');
+  }
+
 }
