@@ -13,4 +13,9 @@ export class UserService {
 
   constructor() { 
   }
+
+  public setUser(value: boolean){
+    this.currentUserSubject.next(value);
+  }
+
 }

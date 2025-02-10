@@ -3,21 +3,25 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonContent, IonItem, IonList, IonInput, IonCardContent, IonCard, IonCardTitle, IonButton } from '@ionic/angular/standalone';
 import { AuthForm } from './interfaces/authForm';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonButton, IonCardTitle, IonCard, IonCardContent, IonInput, IonList, IonItem, IonContent, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonButton, IonCard, IonCardContent, IonInput, IonList, IonItem, IonContent, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class LoginPage implements OnInit {
 
   authForm: FormGroup<AuthForm>;
 
   constructor(
-    private authService : AuthService
+    private authService : AuthService,
+    private userService : UserService,
+    private router : Router
   ) {
     this.authForm = new FormGroup<AuthForm>({
       email: new FormControl('',{
@@ -31,15 +35,28 @@ export class LoginPage implements OnInit {
     });
   }
   ngOnInit() {
+    const that = this;
+    this.userService.isAuthenticated.subscribe({
+      next(value) {
+        console.log(value)
+        if(value){
+          that.router.navigate(['/home'])
+        }
+      },
+    })
   }
 
   submitForm(){
-    this.authService.login( this.authForm.value as {email:string,password: string} )
+    this.authService
+      .login( this.authForm.value as {email:string,password: string} )
       .subscribe({
         next(value) {
-          console.log('server res', value)
+          
         },
       })
   }
+
+
+
 
 }
