@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
   imports: [IonHeader, IonToolbar, IonTitle, IonContent],
 })
-export class HomePage implements OnInit {
+export class HomePage{
   constructor(
     private userService: UserService,
     private router: Router
@@ -20,14 +20,15 @@ export class HomePage implements OnInit {
   isAuthenticated: boolean = false;
 
 
-  ngOnInit(): void {
 
+  ionViewWillEnter(): void {
     this.userService.isAuthenticated
-      .pipe(tap(isAuthenticated => {
-        if(isAuthenticated){
-          null
-        }else{
-          this.handlerAuthentication(isAuthenticated)
+      .pipe(
+        tap(isAuthenticated => {
+          if(isAuthenticated){
+            null
+          }else{
+            this.handlerAuthentication(isAuthenticated)
         }
       }))
       .subscribe( (isAuthenticated: boolean ) => this.isAuthenticated = isAuthenticated )
@@ -38,6 +39,7 @@ export class HomePage implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+  
 
 
 }

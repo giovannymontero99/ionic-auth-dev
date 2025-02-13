@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { StorageService } from '../../services/storage.service';
 import { UserService } from './user.service';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,20 +18,16 @@ export class AuthService {
 
   login( credentials: { email: string, password: string } ): Observable<Object> {
     return this.http.post<{authorization: string}>('api/auth', { user: credentials })
-      .pipe( tap( ({authorization}) => this.setToken(authorization) ) )
+      .pipe( 
+        tap( (response) => this.setToken(response))
+      )
   }
 
-
-  async setToken(authorization: string){
-    const token = authorization.split(' ')[1] ?? null;
-
+  setToken(response: any){
+    const token = response.authorization ?? null;
     if( token !== null ){
-      await this.storageService.set('token',token);
-      this.userSerive.setUser(true);
+      this.storageService.set('token',token);
+      this.userSerive.setAuth(response.user as User);
     }
-    
   }
-
-
-
 }
