@@ -14,15 +14,15 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [IonButton, IonCard, IonCardContent, IonInput, IonList, IonItem, IonContent, CommonModule, FormsModule, ReactiveFormsModule]
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
 
   authForm: FormGroup<AuthForm>;
 
   constructor(
     private authService : AuthService,
-    private userService : UserService,
     private router : Router
   ) {
+
     this.authForm = new FormGroup<AuthForm>({
       email: new FormControl('',{
         validators: [Validators.required],
@@ -34,24 +34,15 @@ export class LoginPage implements OnInit {
       })
     });
   }
-  ngOnInit() {
-    const that = this;
-    this.userService.isAuthenticated.subscribe({
-      next(value) {
-        console.log(value)
-        if(value){
-          that.router.navigate(['/home'])
-        }
-      },
-    })
-  }
+
 
   submitForm(){
     this.authService
       .login( this.authForm.value as {email:string,password: string} )
       .subscribe({
-        next(value) {
-          
+        next: (value)=>{
+          this.router.navigate(['/home'])
+          return
         },
       })
   }

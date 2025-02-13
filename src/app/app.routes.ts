@@ -5,12 +5,8 @@ import { map } from 'rxjs';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -23,5 +19,9 @@ export const routes: Routes = [
     canActivate: [
       ()=> inject(UserService).isAuthenticated.pipe(map( (isAuthenticated:boolean) => !isAuthenticated))
     ]
+  },
+  {
+    path: 'home',
+    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
   },
 ];

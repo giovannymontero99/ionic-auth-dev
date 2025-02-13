@@ -10,16 +10,16 @@ export class StorageService {
   private readonly storagePromise = this._storage.create();
 
 
-  async get(key: string): Promise<any> {
-    return (await this.storagePromise).get(key);
+  get(key: string) {
+    return window.localStorage.getItem(key);
   }
 
   async set(key: string, value: any): Promise<any> {
-    return (await this.storagePromise).set(key, value);
+    return window.localStorage.setItem(key,value);
   }
 
   async getToken(): Promise<unknown>{
-    return (await this.storagePromise).get('token');
+    return ;
   }
 
 }
