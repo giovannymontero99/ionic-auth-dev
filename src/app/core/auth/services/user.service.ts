@@ -24,7 +24,7 @@ export class UserService {
 
   getCurrentUser(): Observable<{ user: User }> {
     
-    return this.http.get<{ user: User }>("user").pipe(
+    return this.http.get<{ user: User }>("/user").pipe(
       tap({
         next: ({ user }) => {
           this.setAuth(user);
