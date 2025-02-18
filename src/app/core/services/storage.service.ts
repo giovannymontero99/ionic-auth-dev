@@ -17,9 +17,4 @@ export class StorageService {
   async set(key: string, value: any): Promise<any> {
     return window.localStorage.setItem(key,value);
   }
-
-  async getToken(): Promise<unknown>{
-    return ;
-  }
-
 }

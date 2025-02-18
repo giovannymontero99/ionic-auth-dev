@@ -1,4 +1,4 @@
-import { HttpInterceptorFn, HttpRequest } from "@angular/common/http";
+import { HttpInterceptorFn } from "@angular/common/http";
 import { constantBaseUrl } from "../const/const";
 
 export const apiInterceptor : HttpInterceptorFn = (req, next) => {

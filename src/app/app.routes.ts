@@ -16,9 +16,6 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./core/auth/login.page').then( m => m.LoginPage),
-    canActivate: [
-      ()=> inject(UserService).isAuthenticated.pipe(map( (isAuthenticated:boolean) => !isAuthenticated))
-    ]
   },
   {
     path: 'home',
