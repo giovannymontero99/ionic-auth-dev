@@ -19,15 +19,12 @@ export class AuthService {
   login( credentials: { email: string, password: string } ): Observable<Object> {
     return this.http.post<{authorization: string}>('/auth', { user: credentials })
       .pipe( 
-        tap( (response) => this.setToken(response))
+        tap( (response) => this.asingValues(response))
       )
   }
 
-  setToken(response: any){
-    const token = response.authorization ?? null;
-    if( token !== null ){
-      this.storageService.set('token',token);
-      this.userSerive.setAuth(response.user as User);
-    }
+  asingValues(response: any){
+    console.log('respuesta de servidor', response);
+    //this.userSerive.setAuth(response.user as User);
   }
 }
